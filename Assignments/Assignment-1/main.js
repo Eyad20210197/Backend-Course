@@ -178,9 +178,35 @@
 
 // B. Part 2: Essay Questions
 
+/*  1. What is the difference between forEach and for...of? When would you use each? (0.5 Grade)
+    Use forEach when you want to execute the same operation on every array element and don't need to stop the loop early.
+    Use for...of when you need to break or skip iterations, use asynchronous operations (await), or require more control over the iteration.
+    // forEach
+    const numbers = [1, 2, 3];
+    numbers.forEach(num => {
+     console.log(num);
+    });
+
+    // for...of
+    for (const num of numbers) {
+    if (num === 2) break;
+     console.log(num);
+    }
+*/
+
+/* 2. What is hoisting and what is the Temporal Dead Zone (TDZ)? Explain with examples. (0.5 Grade)
+    Hoisting is a JavaScript mechanism where variable and function declarations are moved to the top of their containing scope during compilation. This means you can use functions and variables before they are declared in the code.
+    The Temporal Dead Zone (TDZ) is the time between the start of a block and the point where a variable is declared. During this time, accessing the variable will result in a ReferenceError.
+*/
+
 /* 3. What are the main differences between == and ===?
     '==' is loose equality which compares two values after converting them to a common type, while '===' is strict equality which compares both value and type without type conversion.
     For example, 5 == '5' would return true, but 5 === '5' would return false because they are of different types (number vs string).
+*/
+
+/* 4. Explain how try-catch works and why it is important in async operations. (0.5 Grade)
+    The try-catch statement allows you to handle exceptions in your code. You place the code that may throw an error inside the try block, and if an error occurs, control is transferred to the catch block where you can handle the error gracefully. 
+    This is especially important in async operations because errors can occur at any time, and using try-catch ensures that your application can handle these errors without crashing.
 */
 
 /* 5. What’s the difference between type conversion and coercion? Provide examples of each. (0.5 Grade)
