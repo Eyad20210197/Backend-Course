@@ -181,6 +181,7 @@ eventEmitter = new EventEmitter();
 // }
 // console.log(isDirectoryExists('./createfolder'));
 // console.log(isDirectoryExists('www.youtube.com'));
+// console.log(isDirectoryExists('./bonus.js'));
 
 /* 17. Write a function that returns the OS platform and CPU architecture. (0.5 Grade)
     • Output Example: {Platform: “win32”, Arch: “x64”}
