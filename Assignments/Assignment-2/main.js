@@ -164,14 +164,23 @@ eventEmitter = new EventEmitter();
 // });
 
 /* 16.Check if a directory exists. (0.5 Grade)
-    • Input Example: "./notes.txt"
+    • Input Example: "./createfolder"
     • Output Example: true
 */
-// function exists(path) {
-//     return fs.existsSync(path);
+// function isDirectoryExists(dirPath) {
+//     const fullPath = path.resolve(dirPath)
+//     if (!fs.existsSync(dirPath)) {
+//         console.log("This is not a Path");
+//         return false;
+//     }
+//     else {
+//         const stats = fs.statSync(dirPath);
+//         console.log("This Path Exist and is a Dir");
+//         return stats.isDirectory();
+//     }
 // }
-
-// console.log(exists('./notes.txt'));
+// console.log(isDirectoryExists('./createfolder'));
+// console.log(isDirectoryExists('www.youtube.com'));
 
 /* 17. Write a function that returns the OS platform and CPU architecture. (0.5 Grade)
     • Output Example: {Platform: “win32”, Arch: “x64”}
@@ -182,7 +191,7 @@ eventEmitter = new EventEmitter();
 //     return { Platform: platform, Arch: arch };
 // }
 // console.log(getOSInfo());
+
 /*
 */
-
 // @ Eyad-Aboelftoh <3
