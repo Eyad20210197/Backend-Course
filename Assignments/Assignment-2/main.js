@@ -1,7 +1,15 @@
+const http = require('http');
 const path = require('path');
 const fs = require('fs');
 const EventEmitter = require('events');
+const console = require('console');
 eventEmitter = new EventEmitter();
+const source = './big.txt'
+const dest = './dest.txt'
+const port = process.env.PORT || 3000;
+const usersPath = path.join(__dirname, "users.json");
+const readstream = fs.createReadStream(source, { highWaterMark: 5000 });
+const writestream = fs.createWriteStream(dest)
 
 /*1.Write a function that logs the current file path and directory. (0.5 Grade)
     • Output Example: {File: “/home/user/project/index.js”, Dir: “/home/user/project”}
@@ -193,6 +201,249 @@ eventEmitter = new EventEmitter();
 // }
 // console.log(getOSInfo());
 
+/* 18.Use a readable stream to read a file in chunks and log each chunk. (0.5 Grade)
+    • Input Example: "./big.txt"
+    • Output Example: log each chunk
+*/
+// readstream.on('data', (chunk) => {
+//     console.log("=================")
+//     console.log(chunk.toString());
+//     console.log("=================")
+
+// });
+
+/* 19. Use readable and writable streams to copy content from one file to another. (0.5 Grade)
+    • Input Example: "./source.txt", "./dest.txt"
+    • Output Example: File copied using streams
+*/
+// readstream.on("data", (chunk) => {
+//     writestream.write(chunk);
+// });
+
+// readstream.on("end", () => {
+//     writestream.end();
+// });
+
+// writestream.on("finish", () => {
+//     console.log("File copied using streams");
+// });
+
+/* 20. Create a pipeline that reads a file, compresses it, and writes it to another file. (0.5 Grade)
+    • Input Example: "./data.txt", "./data.txt.gz"
+*/
+
+// Part2: Simple CRUD Operations Using HTTP (5 Grades)
+//  • For all the following APIs, you must use the fs module to read and write data from a JSON file (e.g., users.json).
+//  • Do not store or manage data using arrays
+
+/* 1)Create an API that adds a new user to your users stored in a JSON file  (1 Grade)
+                (ensure that the email of the new user doesn’t exist before)
+    o URL: POST /user
+*/
+/* 2)Create an API that updates an existing user's name, age, or email by their ID. The user ID should be retrieved
+    from the URL (1 Grade)
+    Note: Remember to update the corresponding values in the JSON file
+    o URL: PATCH /user/id
+ */
+
+/* 3)Create an API that deletes a User by ID. The user id should be retrieved from the URL (1 Grade)
+    Note: Remember to delete the user from the file
+    o URL: DELETE /user/id
+*/
+
+function sendResponse(res, statusCode, data) {
+    res.statusCode = statusCode;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(data));
+}
+
+function readUsers(callback) {
+    fs.readFile(usersPath, "utf8", (error, data) => {
+        if (error) {
+            callback(error);
+            return;
+        }
+
+        callback(null, JSON.parse(data || "[]"));
+    });
+}
+
+function writeUsers(users, callback) {
+    fs.writeFile(usersPath, JSON.stringify(users, null, 2), callback);
+}
+
+function getRequestBody(req, callback) {
+    let body = "";
+
+    req.on("data", (chunk) => {
+        body += chunk;
+    });
+
+    req.on("end", () => {
+        try {
+            callback(null, body ? JSON.parse(body) : {});
+        } catch (error) {
+            callback(error);
+        }
+    });
+}
+
+const httpServer = http.createServer((req, res) => {
+    const { url, method } = req;
+    const id = Number(url.split("/")[2]);
+
+    if (url === "/user" && method === "POST") {
+        getRequestBody(req, (error, newUser) => {
+            if (error) {
+                sendResponse(res, 400, { message: "Invalid JSON body" });
+                return;
+            }
+
+            readUsers((error, users) => {
+                if (error) {
+                    sendResponse(res, 500, { message: "Fail to read users.json" });
+                    return;
+                }
+
+                const match = users.find((user) => user.email === newUser.email);
+
+                if (match) {
+                    sendResponse(res, 409, { message: "Email already exists" });
+                    return;
+                }
+
+                const newId = users.length === 0 ? 1 : users[users.length - 1].id + 1;
+                const user = {
+                    id: newId,
+                    ...newUser
+                };
+
+                users.push(user);
+
+                writeUsers(users, (error) => {
+                    if (error) {
+                        sendResponse(res, 500, { message: "Fail to save user" });
+                        return;
+                    }
+
+                    sendResponse(res, 201, {
+                        message: "Signup successfully",
+                        user: user
+                    });
+                });
+            });
+        });
+    } else if (url === "/user" && method === "GET") {
+        readUsers((error, users) => {
+            if (error) {
+                sendResponse(res, 500, { message: "Fail to read users.json" });
+                return;
+            }
+
+            sendResponse(res, 200, users);
+        });
+    } else if (url.startsWith("/user/") && method === "GET") {
+        readUsers((error, users) => {
+            if (error) {
+                sendResponse(res, 500, { message: "Fail to read users.json" });
+                return;
+            }
+
+            const user = users.find((user) => user.id === id);
+
+            if (!user) {
+                sendResponse(res, 404, { message: "User not found" });
+                return;
+            }
+
+            sendResponse(res, 200, user);
+        });
+    } else if (url.startsWith("/user/") && method === "PATCH") {
+        getRequestBody(req, (error, updatedData) => {
+            if (error) {
+                sendResponse(res, 400, { message: "Invalid JSON body" });
+                return;
+            }
+
+            readUsers((error, users) => {
+                if (error) {
+                    sendResponse(res, 500, { message: "Fail to read users.json" });
+                    return;
+                }
+
+                const userIndex = users.findIndex((user) => user.id === id);
+
+                if (userIndex === -1) {
+                    sendResponse(res, 404, { message: "User not found" });
+                    return;
+                }
+
+                if (updatedData.email) {
+                    const emailExists = users.some((user) => {
+                        return user.email === updatedData.email && user.id !== id;
+                    });
+
+                    if (emailExists) {
+                        sendResponse(res, 409, { message: "Email already exists" });
+                        return;
+                    }
+                }
+
+                users[userIndex] = {
+                    ...users[userIndex],
+                    ...updatedData,
+                    id: users[userIndex].id
+                };
+
+                writeUsers(users, (error) => {
+                    if (error) {
+                        sendResponse(res, 500, { message: "Fail to save user" });
+                        return;
+                    }
+
+                    sendResponse(res, 200, {
+                        message: "User updated successfully",
+                        user: users[userIndex]
+                    });
+                });
+            });
+        });
+    } else if (url.startsWith("/user/") && method === "DELETE") {
+        readUsers((error, users) => {
+            if (error) {
+                sendResponse(res, 500, { message: "Fail to read users.json" });
+                return;
+            }
+
+            const userIndex = users.findIndex((user) => user.id === id);
+
+            if (userIndex === -1) {
+                sendResponse(res, 404, { message: "User not found" });
+                return;
+            }
+
+            const deletedUser = users.splice(userIndex, 1)[0];
+
+            writeUsers(users, (error) => {
+                if (error) {
+                    sendResponse(res, 500, { message: "Fail to save user" });
+                    return;
+                }
+
+                sendResponse(res, 200, {
+                    message: "User deleted successfully",
+                    user: deletedUser
+                });
+            });
+        });
+    } else {
+        sendResponse(res, 404, { message: "Not found" });
+    }
+});
+
+httpServer.listen(port, () => {
+    console.log(`Server is listening on port: ${port}`);
+});
 /*
 */
 // @ Eyad-Aboelftoh <3
