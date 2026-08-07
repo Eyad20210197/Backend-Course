@@ -95,7 +95,7 @@
 //from the URL
 ///Create an API that deletes a User by ID. The user id should be retrieved from the URL (1 Grade) 
 //Note: Remember to delete the user from the file 
-/*
+
 const fs = require("fs");
 const express = require("express");
 
@@ -257,5 +257,3 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-*/
