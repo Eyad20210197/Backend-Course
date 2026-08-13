@@ -2,16 +2,16 @@
   "name": "assignment-4",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node --watch main.js"
+    "start": "node --watch src/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "express": "^5.2.1",
-    "mysql2": "^3.23.2"
+    "mysql2": "^3.23.3"
   }
 }

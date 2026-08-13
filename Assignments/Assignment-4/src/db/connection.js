@@ -1,6 +1,6 @@
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
-let db = mysql.createPool({
+const db = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
     password: '',
@@ -14,8 +14,10 @@ let db = mysql.createPool({
 
 async function testConnection() {
     try {
-        const [result] = await db.execute('SELECT 1+1 AS result');
+        await db.execute('SELECT 1 + 1 AS result');
+
         console.log('Connected to the database');
+
     } catch (error) {
         console.error('Error connecting to the database:', error);
         process.exit(1);
@@ -23,4 +25,5 @@ async function testConnection() {
 }
 
 testConnection();
-module.exports = db;
+
+export default db;
