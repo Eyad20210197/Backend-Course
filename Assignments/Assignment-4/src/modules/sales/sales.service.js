@@ -8,7 +8,7 @@ export const createSale = async (
     const [result] = await db.execute(
         `
         INSERT INTO sales
-        (product_id, quantity_sold, sale_date)
+        (ProductID, SaleQuantitySold, SaleDate)
         VALUES (?, ?, ?)
         `,
         [
@@ -21,8 +21,8 @@ export const createSale = async (
     await db.execute(
         `
         UPDATE products
-        SET stock_quantity = stock_quantity - ?
-        WHERE id = ?
+        SET ProductStockQuantity = ProductStockQuantity - ?
+        WHERE ProductID = ?
         `,
         [
             quantitySold,
@@ -35,7 +35,14 @@ export const createSale = async (
 
 export const getAllSales = async () => {
     const [rows] = await db.execute(
-        'SELECT * FROM sales'
+        `
+        SELECT
+            SaleID AS id,
+            ProductID AS product_id,
+            SaleQuantitySold AS quantity_sold,
+            DATE_FORMAT(SaleDate, '%Y-%m-%d') AS sale_date
+        FROM sales
+        `
     );
 
     return rows;
@@ -43,7 +50,15 @@ export const getAllSales = async () => {
 
 export const getSalesByProduct = async (productId) => {
     const [rows] = await db.execute(
-        'SELECT * FROM sales WHERE product_id = ?',
+        `
+        SELECT
+            SaleID AS id,
+            ProductID AS product_id,
+            SaleQuantitySold AS quantity_sold,
+            DATE_FORMAT(SaleDate, '%Y-%m-%d') AS sale_date
+        FROM sales
+        WHERE ProductID = ?
+        `,
         [productId]
     );
 

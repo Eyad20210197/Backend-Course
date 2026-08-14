@@ -3,13 +3,13 @@ import db from '../../db/connection.js';
 export const getTotalSoldReport = async () => {
     const [rows] = await db.execute(`
         SELECT
-            products.name,
-            COALESCE(SUM(sales.quantity_sold), 0)
+            products.ProductName AS name,
+            COALESCE(SUM(sales.SaleQuantitySold), 0)
             AS total_quantity_sold
         FROM products
         LEFT JOIN sales
-            ON products.id = sales.product_id
-        GROUP BY products.id, products.name
+            ON products.ProductID = sales.ProductID
+        GROUP BY products.ProductID, products.ProductName
     `);
 
     return rows;
@@ -18,9 +18,14 @@ export const getTotalSoldReport = async () => {
 export const getHighestStockProduct = async () => {
     const [rows] = await db.execute(
         `
-        SELECT *
+        SELECT
+            ProductID AS id,
+            ProductName AS name,
+            ProductPrice AS price,
+            ProductStockQuantity AS stock_quantity,
+            SupplierID AS supplier_id
         FROM products
-        ORDER BY stock_quantity DESC
+        ORDER BY ProductStockQuantity DESC
         LIMIT 1
         `
     );
@@ -31,9 +36,12 @@ export const getHighestStockProduct = async () => {
 export const getSuppliersStartingWithF = async () => {
     const [rows] = await db.execute(
         `
-        SELECT *
+        SELECT
+            SupplierID AS id,
+            SupplierName AS name,
+            SupplierContactNumber AS contact_number
         FROM suppliers
-        WHERE name LIKE 'F%'
+        WHERE SupplierName LIKE 'F%'
         `
     );
 
@@ -42,11 +50,16 @@ export const getSuppliersStartingWithF = async () => {
 
 export const getNeverSoldProducts = async () => {
     const [rows] = await db.execute(`
-        SELECT products.*
+        SELECT
+            products.ProductID AS id,
+            products.ProductName AS name,
+            products.ProductPrice AS price,
+            products.ProductStockQuantity AS stock_quantity,
+            products.SupplierID AS supplier_id
         FROM products
         LEFT JOIN sales
-            ON products.id = sales.product_id
-        WHERE sales.id IS NULL
+            ON products.ProductID = sales.ProductID
+        WHERE sales.SaleID IS NULL
     `);
 
     return rows;
@@ -55,12 +68,12 @@ export const getNeverSoldProducts = async () => {
 export const getSalesDetails = async () => {
     const [rows] = await db.execute(`
         SELECT
-            products.name AS product_name,
-            sales.quantity_sold,
-            sales.sale_date
+            products.ProductName AS product_name,
+            sales.SaleQuantitySold AS quantity_sold,
+            DATE_FORMAT(sales.SaleDate, '%Y-%m-%d') AS sale_date
         FROM sales
         JOIN products
-            ON sales.product_id = products.id
+            ON sales.ProductID = products.ProductID
     `);
 
     return rows;

@@ -1,58 +1,123 @@
 import db from './connection.js';
 
 export const seedDatabase = async () => {
-    const [supplierRows] = await db.execute(
-        'SELECT id FROM suppliers WHERE name = ?',
-        ['FreshFoods']
-    );
+    const connection = await db.getConnection();
 
-    let supplierId;
+    try {
+        await connection.beginTransaction();
 
-    if (supplierRows.length > 0) {
-        supplierId = supplierRows[0].id;
-    } else {
-        const [supplierResult] = await db.execute(
-            'INSERT INTO suppliers (name, contact_number) VALUES (?, ?)',
-            ['FreshFoods', '01001234567']
-        );
-
-        supplierId = supplierResult.insertId;
-    }
-
-    const products = [
-        ['Milk', 15, 50, supplierId],
-        ['Bread', 10, 30, supplierId],
-        ['Eggs', 20, 40, supplierId]
-    ];
-
-    for (const product of products) {
-        await db.execute(
+        const [supplierRows] = await connection.execute(
             `
-            INSERT INTO products
-            (name, price, stock_quantity, supplier_id)
-            VALUES (?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE
-                price = VALUES(price),
-                stock_quantity = VALUES(stock_quantity),
-                supplier_id = VALUES(supplier_id)
+            SELECT SupplierID AS id
+            FROM suppliers
+            WHERE SupplierName = ?
+            LIMIT 1
             `,
-            product
+            ['FreshFoods']
         );
-    }
 
-    const [milkRows] = await db.execute(
-        'SELECT id FROM products WHERE name = ?',
-        ['Milk']
-    );
+        let supplierId;
 
-    if (milkRows.length > 0) {
-        await db.execute(
+        if (supplierRows.length > 0) {
+            supplierId = supplierRows[0].id;
+        } else {
+            const [supplierResult] = await connection.execute(
+                `
+                INSERT INTO suppliers
+                (SupplierName, SupplierContactNumber)
+                VALUES (?, ?)
+                `,
+                ['FreshFoods', '01001234567']
+            );
+
+            supplierId = supplierResult.insertId;
+        }
+
+        const products = [
+            ['Milk', 15, 50, supplierId],
+            ['Bread', 10, 30, supplierId],
+            ['Eggs', 20, 40, supplierId]
+        ];
+
+        for (const [name, price, stockQuantity, productSupplierId] of products) {
+            const [productRows] = await connection.execute(
+                `
+                SELECT ProductID AS id
+                FROM products
+                WHERE ProductName = ?
+                LIMIT 1
+                `,
+                [name]
+            );
+
+            if (productRows.length > 0) {
+                await connection.execute(
+                    `
+                    UPDATE products
+                    SET ProductPrice = ?,
+                        ProductStockQuantity = ?,
+                        SupplierID = ?
+                    WHERE ProductID = ?
+                    `,
+                    [
+                        price,
+                        stockQuantity,
+                        productSupplierId,
+                        productRows[0].id
+                    ]
+                );
+            } else {
+                await connection.execute(
+                    `
+                    INSERT INTO products
+                    (ProductName, ProductPrice, ProductStockQuantity, SupplierID)
+                    VALUES (?, ?, ?, ?)
+                    `,
+                    [name, price, stockQuantity, productSupplierId]
+                );
+            }
+        }
+
+        const [milkRows] = await connection.execute(
             `
-            INSERT INTO sales
-            (product_id, quantity_sold, sale_date)
-            VALUES (?, ?, ?)
+            SELECT ProductID AS id
+            FROM products
+            WHERE ProductName = ?
+            LIMIT 1
             `,
-            [milkRows[0].id, 2, '2025-05-20']
+            ['Milk']
         );
+
+        if (milkRows.length > 0) {
+            const [saleRows] = await connection.execute(
+                `
+                SELECT SaleID AS id
+                FROM sales
+                WHERE ProductID = ?
+                    AND SaleQuantitySold = ?
+                    AND SaleDate = ?
+                LIMIT 1
+                `,
+                [milkRows[0].id, 2, '2025-05-20']
+            );
+
+            if (saleRows.length === 0) {
+                await connection.execute(
+                    `
+                    INSERT INTO sales
+                    (ProductID, SaleQuantitySold, SaleDate)
+                    VALUES (?, ?, ?)
+                    `,
+                    [milkRows[0].id, 2, '2025-05-20']
+                );
+            }
+        }
+
+        await connection.commit();
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
     }
 };

@@ -7,7 +7,7 @@ export const createSupplier = async (
     const [result] = await db.execute(
         `
         INSERT INTO suppliers
-        (name, contact_number)
+        (SupplierName, SupplierContactNumber)
         VALUES (?, ?)
         `,
         [name, contactNumber]
@@ -18,7 +18,13 @@ export const createSupplier = async (
 
 export const getAllSuppliers = async () => {
     const [rows] = await db.execute(
-        'SELECT * FROM suppliers'
+        `
+        SELECT
+            SupplierID AS id,
+            SupplierName AS name,
+            SupplierContactNumber AS contact_number
+        FROM suppliers
+        `
     );
 
     return rows;
@@ -32,8 +38,8 @@ export const updateSupplier = async (
     const [result] = await db.execute(
         `
         UPDATE suppliers
-        SET name = ?, contact_number = ?
-        WHERE id = ?
+        SET SupplierName = ?, SupplierContactNumber = ?
+        WHERE SupplierID = ?
         `,
         [name, contactNumber, id]
     );
@@ -47,7 +53,7 @@ export const updateSupplier = async (
 
 export const deleteSupplier = async (id) => {
     const [result] = await db.execute(
-        'DELETE FROM suppliers WHERE id = ?',
+        'DELETE FROM suppliers WHERE SupplierID = ?',
         [id]
     );
 

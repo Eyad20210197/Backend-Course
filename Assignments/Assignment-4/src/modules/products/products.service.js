@@ -9,7 +9,7 @@ export const createProduct = async (
     const [result] = await db.execute(
         `
         INSERT INTO products
-        (name, price, stock_quantity, supplier_id)
+        (ProductName, ProductPrice, ProductStockQuantity, SupplierID)
         VALUES (?, ?, ?, ?)
         `,
         [name, price, stockQuantity, supplierId]
@@ -20,7 +20,15 @@ export const createProduct = async (
 
 export const getAllProducts = async () => {
     const [rows] = await db.execute(
-        'SELECT * FROM products'
+        `
+        SELECT
+            ProductID AS id,
+            ProductName AS name,
+            ProductPrice AS price,
+            ProductStockQuantity AS stock_quantity,
+            SupplierID AS supplier_id
+        FROM products
+        `
     );
 
     return rows;
@@ -28,7 +36,16 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id) => {
     const [rows] = await db.execute(
-        'SELECT * FROM products WHERE id = ?',
+        `
+        SELECT
+            ProductID AS id,
+            ProductName AS name,
+            ProductPrice AS price,
+            ProductStockQuantity AS stock_quantity,
+            SupplierID AS supplier_id
+        FROM products
+        WHERE ProductID = ?
+        `,
         [id]
     );
 
@@ -51,11 +68,11 @@ export const updateProduct = async (
     const [result] = await db.execute(
         `
         UPDATE products
-        SET name = ?,
-            price = ?,
-            stock_quantity = ?,
-            supplier_id = ?
-        WHERE id = ?
+        SET ProductName = ?,
+            ProductPrice = ?,
+            ProductStockQuantity = ?,
+            SupplierID = ?
+        WHERE ProductID = ?
         `,
         [
             name,
@@ -75,7 +92,7 @@ export const updateProduct = async (
 
 export const deleteProduct = async (id) => {
     const [result] = await db.execute(
-        'DELETE FROM products WHERE id = ?',
+        'DELETE FROM products WHERE ProductID = ?',
         [id]
     );
 
@@ -88,7 +105,7 @@ export const deleteProduct = async (id) => {
 
 export const updateBreadPrice = async () => {
     const [result] = await db.execute(
-        'UPDATE products SET price = ? WHERE name = ?',
+        'UPDATE products SET ProductPrice = ? WHERE ProductName = ?',
         [25, 'Bread']
     );
 
@@ -101,7 +118,7 @@ export const updateBreadPrice = async () => {
 
 export const deleteEggs = async () => {
     const [result] = await db.execute(
-        'DELETE FROM products WHERE name = ?',
+        'DELETE FROM products WHERE ProductName = ?',
         ['Eggs']
     );
 

@@ -58,6 +58,36 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.patch('/bread/price', async (req, res, next) => {
+    try {
+        await updateBreadPrice();
+
+        return successResponse(
+            res,
+            200,
+            'Bread price updated successfully'
+        );
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.delete('/eggs', async (req, res, next) => {
+    try {
+        await deleteEggs();
+
+        return successResponse(
+            res,
+            200,
+            'Eggs deleted successfully'
+        );
+
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -116,36 +146,6 @@ router.delete('/:id', async (req, res, next) => {
             res,
             200,
             'Product deleted successfully'
-        );
-
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.patch('/bread/price', async (req, res, next) => {
-    try {
-        await updateBreadPrice();
-
-        return successResponse(
-            res,
-            200,
-            'Bread price updated successfully'
-        );
-
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.delete('/eggs', async (req, res, next) => {
-    try {
-        await deleteEggs();
-
-        return successResponse(
-            res,
-            200,
-            'Eggs deleted successfully'
         );
 
     } catch (error) {

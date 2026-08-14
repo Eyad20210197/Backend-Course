@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 import adminController from './modules/admin/index.js';
 import productsController from './modules/products/index.js';
@@ -13,6 +14,7 @@ import { seedDatabase } from './db/seed.service.js';
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
