@@ -1,0 +1,151 @@
+{
+  "info": {
+    "_postman_id": "f8f6c257-32ad-4f12-b1af-41d66ca0f4e8",
+    "name": "Assignment 5 - Sequelize APIs",
+    "description": "All API requests required by Assignment 5.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "userId", "value": "1" },
+    { "key": "secondUserId", "value": "2" },
+    { "key": "postId", "value": "1" },
+    { "key": "commentId", "value": "1" },
+    { "key": "email", "value": "user1@gmail.com" }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Add User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"User One\",\n  \"email\": \"{{email}}\",\n  \"password\": \"password1\",\n  \"role\": \"user\"\n}"
+            },
+            "url": "{{baseUrl}}/users/signup"
+          }
+        },
+        {
+          "name": "Create or Update User by Primary Key",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"{{email}}\",\n  \"password\": \"password1\",\n  \"role\": \"user\"\n}"
+            },
+            "url": "{{baseUrl}}/users/{{userId}}"
+          }
+        },
+        {
+          "name": "Find User by Email",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/by-email?email={{email}}"
+          }
+        },
+        {
+          "name": "Get User by Primary Key Without Role",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/user/{{userId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Add Post",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"First Post\",\n  \"content\": \"This is the first post.\",\n  \"userId\": {{userId}}\n}"
+            },
+            "url": "{{baseUrl}}/posts"
+          }
+        },
+        {
+          "name": "Delete Owned Post",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": {{userId}}\n}"
+            },
+            "url": "{{baseUrl}}/posts/{{postId}}"
+          }
+        },
+        {
+          "name": "Get Posts with User and Comments",
+          "request": { "method": "GET", "url": "{{baseUrl}}/posts/details" }
+        },
+        {
+          "name": "Count Comments for Each Post",
+          "request": { "method": "GET", "url": "{{baseUrl}}/posts/comment-count" }
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Add Comments in Bulk",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comments\": [\n    { \"content\": \"This is the first comment.\", \"postId\": {{postId}}, \"userId\": {{userId}} },\n    { \"content\": \"Amazing post!\", \"postId\": {{postId}}, \"userId\": {{secondUserId}} }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/comments"
+          }
+        },
+        {
+          "name": "Update Owned Comment",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": {{userId}},\n  \"content\": \"Updated comment\"\n}"
+            },
+            "url": "{{baseUrl}}/comments/{{commentId}}"
+          }
+        },
+        {
+          "name": "Find or Create Comment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postId\": {{postId}},\n  \"userId\": {{userId}},\n  \"content\": \"This is a sample comment\"\n}"
+            },
+            "url": "{{baseUrl}}/comments/find-or-create"
+          }
+        },
+        {
+          "name": "Search and Count Comments by Word",
+          "request": { "method": "GET", "url": "{{baseUrl}}/comments/search?word=the" }
+        },
+        {
+          "name": "Get Three Newest Post Comments",
+          "request": { "method": "GET", "url": "{{baseUrl}}/comments/newest/{{postId}}" }
+        },
+        {
+          "name": "Get Comment with User and Post",
+          "request": { "method": "GET", "url": "{{baseUrl}}/comments/details/{{commentId}}" }
+        }
+      ]
+    }
+  ]
+}
