@@ -4,3 +4,4 @@ node_modules/
 Assignments/Assignment-4/Frontend/
 postman
 tmp/
+.env
