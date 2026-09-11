@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, initial-scale=1.0">
+  <title>The Cairo Gazette & Classic Bookshelf — Est. 1984</title>
+  
+  <!-- Typography: Authentic 1980s Editorial Serifs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="vintage-body">
+
+  <!-- Desktop Decorative Framing -->
+  <div class="newspaper-page-wrapper">
+    <div class="broadsheet-outer-border">
+      <div class="broadsheet-inner-border">
+        
+        <!-- ============================================================== -->
+        <!-- BROADSHEET MASTHEAD (1980s Vintage Egyptian Press Style) -->
+        <!-- ============================================================== -->
+        <header class="masthead">
+          <div class="masthead-top-wire">
+            <div class="wire-item"><span class="vintage-bracket">[</span> ISSUE NO. 84-CAIRO <span class="vintage-bracket">]</span></div>
+            <div class="wire-item archivist-motto">“KNOWLEDGE IS LIGHT — AL-QIRA'A LIL-JAMEE”</div>
+            <div class="wire-item"><span class="vintage-bracket">[</span> DOWNTOWN BOOKSTORE EDITION <span class="vintage-bracket">]</span></div>
+          </div>
+
+          <div class="masthead-main-box">
+            <div class="masthead-side-col left">
+              <div class="woodcut-circle">
+                <svg viewBox="0 0 100 100" class="woodcut-svg">
+                  <!-- Book & Sun Emblem -->
+                  <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2.5" fill="none" stroke-dasharray="3 2" />
+                  <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="1.2" fill="none" />
+                  <path d="M30 65 Q50 55 70 65 L68 45 Q50 35 32 45 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <line x1="50" y1="36" x2="50" y2="58" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="50" cy="24" r="5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="side-col-text">
+                <span class="micro-label">CAIRO WEATHER</span>
+                <p class="micro-body">Clear skies over the Nile. Calm and pleasant breeze in the reading hall.</p>
+              </div>
+            </div>
+
+            <div class="masthead-center">
+              <div class="masthead-ornament-top">
+                <svg viewBox="0 0 300 24" class="fleuron-svg">
+                  <path d="M0 12 Q75 0 150 12 Q225 24 300 12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  <circle cx="150" cy="12" r="4" fill="currentColor"/>
+                  <circle cx="75" cy="8" r="2.5" fill="currentColor"/>
+                  <circle cx="225" cy="16" r="2.5" fill="currentColor"/>
+                </svg>
+              </div>
+              
+              <h1 class="newspaper-title">The Cairo Gazette</h1>
+              <div class="newspaper-subtitle">&amp; CLASSIC BOOKSHELF &bull; EST. 1984</div>
+              
+              <div class="masthead-ornament-bottom">
+                <span class="vintage-rule"></span>
+                <span class="ornament-leaf">§</span>
+                <span class="vintage-rule"></span>
+              </div>
+            </div>
+
+            <div class="masthead-side-col right">
+              <div class="woodcut-circle">
+                <svg viewBox="0 0 100 100" class="woodcut-svg">
+                  <!-- Quill & Inkwell -->
+                  <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2.5" fill="none" stroke-dasharray="3 2" />
+                  <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="1.2" fill="none" />
+                  <path d="M68 22 C62 30 52 48 42 62 L36 68 L40 60 C46 50 60 32 68 22 Z" fill="currentColor"/>
+                  <path d="M34 70 L30 76 L38 74 Z" fill="currentColor"/>
+                  <path d="M48 68 C45 68 38 72 38 78 L62 78 C62 72 55 68 48 68 Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <div class="side-col-text">
+                <span class="micro-label">LIBRARY NOTICE</span>
+                <p class="micro-body">Every book is safely kept on the shelf. Pick any book below to view its details.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newspaper Info Banner Bar -->
+          <div class="masthead-dateline-bar">
+            <div class="dateline-segment"><strong>VOL. 84</strong> — NO. 42</div>
+            <div class="dateline-segment">CAIRO &bull; ALEXANDRIA &bull; LUXOR</div>
+            <div class="dateline-segment highlight-date">FRIDAY, OCTOBER 19, 1984</div>
+            <div class="dateline-segment">SPECIAL LIBRARY EDITION</div>
+            <div class="dateline-segment">PRICE: 50 PIASTRES</div>
+          </div>
+        </header>
+
+        <!-- ============================================================== -->
+        <!-- QUICK STATUS BAR -->
+        <!-- ============================================================== -->
+        <section class="ticker-ledger-bar">
+          <div class="ledger-stat-chip" id="stat-total-books">
+            <span class="chip-icon">
+              <svg viewBox="0 0 24 24" class="mini-svg"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5a.5.5 0 0 0-.5.5v.5h14v2H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v15H6.5A2.5 2.5 0 0 1 4 14.5v5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="chip-label">Total Books:</span>
+            <strong class="chip-value" id="count-books">—</strong>
+          </div>
+          
+          <div class="ledger-stat-chip" id="stat-authors">
+            <span class="chip-icon">
+              <svg viewBox="0 0 24 24" class="mini-svg"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="chip-label">Authors:</span>
+            <strong class="chip-value" id="count-authors">Registered</strong>
+          </div>
+
+          <div class="ledger-stat-chip" id="stat-logs">
+            <span class="chip-icon">
+              <svg viewBox="0 0 24 24" class="mini-svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="chip-label">History Logs:</span>
+            <strong class="chip-value" id="count-logs">Active Scroll</strong>
+          </div>
+
+          <div class="ledger-stat-chip live-status">
+            <span class="ink-indicator-dot"></span>
+            <span class="chip-label">Library Status:</span>
+            <strong class="chip-value" id="press-status-text">Connected &amp; Live</strong>
+          </div>
+
+          <button class="broadsheet-action-btn quick-refresh" id="btn-refresh-all" title="Reload books from database">
+            <svg viewBox="0 0 24 24" class="mini-svg"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/></svg>
+            Refresh Shelf
+          </button>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- THE GRAND 3D MAHOGANY BOOKSHELF -->
+        <!-- ============================================================== -->
+        <section class="bookshelf-section">
+          <div class="section-woodcut-heading">
+            <div class="flourish-line"></div>
+            <div class="heading-content">
+              <span class="vintage-tag">THE LIBRARY DISPLAY</span>
+              <h2 class="section-title">The Grand Classic Bookshelf</h2>
+              <p class="section-subtitle">Click on any book spine to open and read it on the wooden reading desk.</p>
+            </div>
+            <div class="flourish-line"></div>
+          </div>
+
+          <!-- 3D Mahogany Cabinet Structure -->
+          <div class="bookshelf-cabinet">
+            <!-- Top Crown Carving -->
+            <div class="cabinet-cornice">
+              <div class="brass-plaque">THE CLASSIC BOOKSHELF &bull; CAIRO DOWNTOWN &bull; ESTABLISHED 1984</div>
+            </div>
+
+            <!-- Shelf Row 1: Modern & Speculative Shelf -->
+            <div class="shelf-bay" id="shelf-bay-upper">
+              <div class="shelf-label-tag">TOP SHELF &bull; RECENT &amp; MODERN NOVELS</div>
+              <div class="book-row" id="books-row-1">
+                <div class="bookshelf-loading-placeholder">
+                  <span class="quill-spinner"></span> Loading books from the library database...
+                </div>
+              </div>
+              <div class="mahogany-wood-shelf">
+                <div class="shelf-wood-bevel"></div>
+                <div class="brass-trim-inlay"></div>
+              </div>
+            </div>
+
+            <!-- Shelf Row 2: Classic Heritage & Vintage Shelf -->
+            <div class="shelf-bay" id="shelf-bay-lower">
+              <div class="shelf-label-tag">BOTTOM SHELF &bull; CLASSIC &amp; HISTORICAL BOOKS</div>
+              <div class="book-row" id="books-row-2">
+                <!-- Dynamically populated 3D Books -->
+              </div>
+              <div class="mahogany-wood-shelf">
+                <div class="shelf-wood-bevel"></div>
+                <div class="brass-trim-inlay"></div>
+              </div>
+            </div>
+
+            <!-- Cabinet Base Plinth -->
+            <div class="cabinet-plinth"></div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- EDITORIAL DEPARTMENT TABS (Simple English) -->
+        <!-- ============================================================== -->
+        <nav class="editorial-departments-nav">
+          <button class="department-tab-btn active" data-tab="dept-acquisitions">
+            <span class="tab-number">SECTION 1</span>
+            <span class="tab-title">Add &amp; Edit Books</span>
+            <span class="tab-desc">Add new books, ready collections, or update year</span>
+          </button>
+          
+          <button class="department-tab-btn" data-tab="dept-curator">
+            <span class="tab-number">SECTION 2</span>
+            <span class="tab-title">Search &amp; Filter</span>
+            <span class="tab-desc">Find books by title, year, category, or quick picks</span>
+          </button>
+          
+          <button class="department-tab-btn" data-tab="dept-broadsheet">
+            <span class="tab-number">SECTION 3</span>
+            <span class="tab-title">Book Reports &amp; Analytics</span>
+            <span class="tab-desc">Sorted lists, clean summaries, and log history</span>
+          </button>
+          
+          <button class="department-tab-btn" data-tab="dept-charter">
+            <span class="tab-number">SECTION 4</span>
+            <span class="tab-title">System Setup &amp; Log Journal</span>
+            <span class="tab-desc">Database tables setup and write new history logs</span>
+          </button>
+        </nav>
+
+        <!-- ============================================================== -->
+        <!-- SECTION 1: ADD & EDIT BOOKS -->
+        <!-- ============================================================== -->
+        <main class="department-content-panel active" id="dept-acquisitions">
+          
+          <div class="columns-grid two-columns">
+            
+            <!-- Left Column: Add a Single Book (POST /books) -->
+            <article class="broadsheet-card parchment-paper">
+              <div class="card-masthead">
+                <span class="card-ornament">STEP 1</span>
+                <h3 class="card-heading">Add a New Book</h3>
+                <span class="card-tagline">Save a single book directly to the shelf</span>
+              </div>
+              
+              <p class="dropcap-lead">
+                <span class="dropcap">W</span>rite the details of the book below to put it directly on the bookshelf. The title is required and cannot be empty.
+              </p>
+
+              <form id="form-single-book" class="vintage-form">
+                <div class="form-row">
+                  <label for="book-title" class="vintage-label">Book Title <span class="required-asterisk">*</span></label>
+                  <input type="text" id="book-title" name="title" class="vintage-input" placeholder="e.g. Palace Walk (Bein El-Qasrein)" required>
+                  <small class="field-hint">Required: Must be a non-empty text string.</small>
+                </div>
+
+                <div class="form-row two-fields">
+                  <div class="field-col">
+                    <label for="book-author" class="vintage-label">Author Name</label>
+                    <input type="text" id="book-author" name="author" class="vintage-input" placeholder="e.g. Naguib Mahfouz">
+                  </div>
+                  <div class="field-col">
+                    <label for="book-year" class="vintage-label">Release Year</label>
+                    <input type="number" id="book-year" name="year" class="vintage-input" placeholder="e.g. 1956" value="1984">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <label for="book-genres" class="vintage-label">Categories / Genres</label>
+                  <input type="text" id="book-genres" name="genres" class="vintage-input" placeholder="e.g. Drama, Classic Literature (separated by comma)">
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="broadsheet-action-btn primary-wax">
+                    <span class="btn-stamp-mark"></span>
+                    <svg viewBox="0 0 24 24" class="mini-svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="1.5"/><polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="1.5"/></svg>
+                    Put Book on the Shelf
+                  </button>
+                </div>
+              </form>
+            </article>
+
+            <!-- Right Column Top: Add Ready Book Collections (POST /books/batch) -->
+            <div class="stack-column">
+              <article class="broadsheet-card parchment-paper">
+                <div class="card-masthead">
+                  <span class="card-ornament">STEP 2</span>
+                  <h3 class="card-heading">Add Ready Book Collections (Batch)</h3>
+                  <span class="card-tagline">Add multiple famous books with one click</span>
+                </div>
+
+                <p class="editorial-p">
+                  Choose a ready collection below to quickly add 3 famous books together into the library:
+                </p>
+
+                <div class="preset-estate-selector">
+                  <span class="sub-label">Select a Collection:</span>
+                  <div class="estate-chips-group">
+                    <button type="button" class="estate-preset-btn active" id="btn-preset-1980s">
+                      <strong>1980s Visionary Novels</strong>
+                      <small>(Neuromancer, Martian Chronicles, Dune)</small>
+                    </button>
+                    <button type="button" class="estate-preset-btn" id="btn-preset-classics">
+                      <strong>Classic Fantasy Books</strong>
+                      <small>(The Hobbit, Lord of the Rings, Silmarillion)</small>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="batch-preview-box" id="batch-preview-container">
+                  <!-- Rendered dynamically -->
+                </div>
+
+                <div class="form-actions right-align">
+                  <button type="button" class="broadsheet-action-btn" id="btn-execute-batch">
+                    <svg viewBox="0 0 24 24" class="mini-svg"><path d="M19 11H5m14 0a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2m14 0V9a2 2 0 0 0-2-2M5 11V9a2 2 0 0 1 2-2m0 0V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M7 7h10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                    Add This Entire Collection
+                  </button>
+                </div>
+              </article>
+
+              <!-- Right Column Bottom: Update & Delete Books -->
+              <article class="broadsheet-card parchment-paper">
+                <div class="card-masthead">
+                  <span class="card-ornament">STEP 3 &amp; 4</span>
+                  <h3 class="card-heading">Update &amp; Delete Books</h3>
+                  <span class="card-tagline">Change release year &bull; Delete older books</span>
+                </div>
+
+                <!-- Update Book Tab (PATCH /books/:title) -->
+                <div class="sub-section-box">
+                  <h4 class="sub-heading">Update Book Release Year</h4>
+                  <p class="micro-body">Type the book title and enter the new release year.</p>
+                  <form id="form-update-book" class="vintage-form compact">
+                    <div class="form-row two-fields">
+                      <div class="field-col">
+                        <label class="vintage-label">Exact Book Title</label>
+                        <input type="text" id="update-target-title" class="vintage-input" placeholder="e.g. Future" value="Future" required>
+                      </div>
+                      <div class="field-col">
+                        <label class="vintage-label">New Release Year</label>
+                        <input type="number" id="update-new-year" class="vintage-input" placeholder="e.g. 2022" value="2022">
+                      </div>
+                    </div>
+                    <button type="submit" class="broadsheet-action-btn secondary-brass">
+                      <svg viewBox="0 0 24 24" class="mini-svg"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                      Save Year Update
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Deaccession Tab (DELETE /books/before-year) -->
+                <div class="sub-section-box alert-box">
+                  <h4 class="sub-heading deaccession-title">Delete Old Books (Before a Year)</h4>
+                  <p class="micro-body">Remove books published before a certain year from the database.</p>
+                  <form id="form-delete-before" class="vintage-form compact inline-form">
+                    <div class="inline-field">
+                      <label class="vintage-label">Delete Before Year:</label>
+                      <input type="number" id="delete-cutoff-year" class="vintage-input year-input" value="2000" min="1500" max="2100">
+                    </div>
+                    <button type="submit" class="broadsheet-action-btn danger-wax">
+                      <svg viewBox="0 0 24 24" class="mini-svg"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                      Delete Old Books
+                    </button>
+                  </form>
+                </div>
+              </article>
+            </div>
+
+          </div>
+
+        </main>
+
+        <!-- ============================================================== -->
+        <!-- SECTION 2: SEARCH & FILTER -->
+        <!-- ============================================================== -->
+        <main class="department-content-panel" id="dept-curator">
+          
+          <!-- Curator Desks Top Bar -->
+          <div class="search-desks-grid">
+            
+            <!-- Desk 1: Title Lookup (GET /books/title) -->
+            <div class="curator-desk-card">
+              <div class="desk-badge">SEARCH 1</div>
+              <h4 class="desk-title">Find by Exact Title</h4>
+              <p class="micro-body">Search for a specific book by its title name.</p>
+              <form id="form-search-title" class="desk-form">
+                <input type="text" id="search-title-input" class="vintage-input" placeholder="e.g. Brave New World" value="Brave New World">
+                <button type="submit" class="broadsheet-action-btn">
+                  <svg viewBox="0 0 24 24" class="mini-svg"><circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="1.5"/></svg>
+                  Search Title
+                </button>
+              </form>
+            </div>
+
+            <!-- Desk 2: Year Range (GET /books/year) -->
+            <div class="curator-desk-card">
+              <div class="desk-badge">SEARCH 2</div>
+              <h4 class="desk-title">Find by Year Range</h4>
+              <p class="micro-body">Show books published between two years.</p>
+              <form id="form-search-year" class="desk-form">
+                <div class="year-range-inputs">
+                  <input type="number" id="year-from" class="vintage-input mini" value="1990" placeholder="From">
+                  <span class="range-sep">&ndash;</span>
+                  <input type="number" id="year-to" class="vintage-input mini" value="2010" placeholder="To">
+                </div>
+                <button type="submit" class="broadsheet-action-btn">
+                  <svg viewBox="0 0 24 24" class="mini-svg"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                  Filter Years
+                </button>
+              </form>
+            </div>
+
+            <!-- Desk 3: Literary Genre (GET /books/genre) -->
+            <div class="curator-desk-card">
+              <div class="desk-badge">SEARCH 3</div>
+              <h4 class="desk-title">Filter by Category</h4>
+              <p class="micro-body">Pick a genre to view all its books.</p>
+              <form id="form-search-genre" class="desk-form">
+                <select id="search-genre-select" class="vintage-input select-vintage">
+                  <option value="Science Fiction">Science Fiction</option>
+                  <option value="Fantasy">Fantasy</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Children">Children</option>
+                  <option value="Classic Literature">Classic Literature</option>
+                  <option value="Horror">Horror</option>
+                </select>
+                <button type="submit" class="broadsheet-action-btn">
+                  <svg viewBox="0 0 24 24" class="mini-svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                  Show Books
+                </button>
+              </form>
+            </div>
+
+            <!-- Desk 4: Special Curations (Skip-Limit, Integer Year, Exclude Genres) -->
+            <div class="curator-desk-card highlight-card">
+              <div class="desk-badge">QUICK PICKS</div>
+              <h4 class="desk-title">Smart Queries</h4>
+              <div class="special-buttons-stack">
+                <button type="button" class="curator-pill-btn" id="btn-curator-reserve">
+                  <strong>Curator's Special Pick</strong>
+                  <small>(Skip first 2, show next 3 newest books)</small>
+                </button>
+                <button type="button" class="curator-pill-btn" id="btn-curator-integer">
+                  <strong>Standard Number Years</strong>
+                  <small>(Check books where year is saved as an integer)</small>
+                </button>
+                <button type="button" class="curator-pill-btn" id="btn-curator-sanctuary">
+                  <strong>Peaceful Books Only</strong>
+                  <small>(Exclude Horror &amp; Science Fiction)</small>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Query Results Presentation Parchment -->
+          <section class="curator-results-section">
+            <div class="results-header-banner">
+              <div class="results-title-group">
+                <h3 class="results-headline" id="curator-results-title">Shelf Books Catalog</h3>
+                <span class="results-count-stamp" id="curator-results-stamp">Showing All Physical Books</span>
+              </div>
+              <div class="results-actions">
+                <button class="broadsheet-action-btn text-only" id="btn-show-all-books">Show All Books</button>
+              </div>
+            </div>
+
+            <div class="results-cards-grid" id="curator-results-grid">
+              <!-- Rendered results cards with antique styling -->
+            </div>
+          </section>
+
+        </main>
+
+        <!-- ============================================================== -->
+        <!-- SECTION 3: BOOK REPORTS & ANALYTICS -->
+        <!-- ============================================================== -->
+        <main class="department-content-panel" id="dept-broadsheet">
+          
+          <div class="gazette-study-tabs">
+            <button class="gazette-tab active" data-study="agg-modern">
+              <span class="gazette-num">1.</span> Modern Books (Post-2000)
+              <small>Filter after year 2000 &amp; sort newest first</small>
+            </button>
+            <button class="gazette-tab" data-study="agg-projection">
+              <span class="gazette-num">2.</span> Simple Summary List
+              <small>Show only Title, Author &amp; Year</small>
+            </button>
+            <button class="gazette-tab" data-study="agg-unwind">
+              <span class="gazette-num">3.</span> Books by Each Category
+              <small>Splits categories into separate cards</small>
+            </button>
+            <button class="gazette-tab" data-study="agg-provenance">
+              <span class="gazette-num">4.</span> Books with History Logs
+              <small>Books connected to logs via $lookup join</small>
+            </button>
+          </div>
+
+          <!-- Study Dynamic Panel -->
+          <article class="broadsheet-card parchment-paper full-width" id="gazette-study-panel">
+            <div class="study-card-header">
+              <div class="study-meta">
+                <span class="vintage-tag" id="study-tag">ANALYTICAL REPORT</span>
+                <h3 class="study-title" id="study-title">Modern Books Report</h3>
+                <p class="editorial-p" id="study-description">
+                  Shows all books published after the specified year, sorted chronologically from newest to oldest.
+                </p>
+              </div>
+              <div class="study-controls" id="study-controls">
+                <label class="vintage-label">Year Filter:</label>
+                <input type="number" id="study-year-input" class="vintage-input mini" value="2000">
+                <button type="button" class="broadsheet-action-btn" id="btn-run-study">
+                  Run Report
+                </button>
+              </div>
+            </div>
+
+            <div class="study-results-viewport" id="study-results-viewport">
+              <!-- Rendered Aggregation Results -->
+            </div>
+          </article>
+
+        </main>
+
+        <!-- ============================================================== -->
+        <!-- SECTION 4: SYSTEM SETUP & LOG JOURNAL -->
+        <!-- ============================================================== -->
+        <main class="department-content-panel" id="dept-charter">
+          
+          <div class="columns-grid two-columns">
+            
+            <!-- Left: Database Setup -->
+            <article class="broadsheet-card parchment-paper">
+              <div class="card-masthead">
+                <span class="card-ornament">SETUP 1, 2 &amp; 3</span>
+                <h3 class="card-heading">Database Setup (Run Once)</h3>
+                <span class="card-tagline">Create collections and rapid search index</span>
+              </div>
+
+              <div class="charter-item-box">
+                <div class="charter-icon">
+                  <svg viewBox="0 0 24 24" class="medium-svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </div>
+                <div class="charter-details">
+                  <h4 class="sub-heading">Create Books Table (With Title Check)</h4>
+                  <p class="micro-body">Creates the books collection with schema validation ensuring that every single book has a non-empty title.</p>
+                  <button type="button" class="broadsheet-action-btn secondary-brass" id="btn-charter-books">
+                    Create Books Table
+                  </button>
+                </div>
+              </div>
+
+              <div class="charter-item-box">
+                <div class="charter-icon">
+                  <svg viewBox="0 0 24 24" class="medium-svg"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                </div>
+                <div class="charter-details">
+                  <h4 class="sub-heading">Create 1MB Capped Logs Table</h4>
+                  <p class="micro-body">Creates a 1MB circular logs collection that automatically stores continuous library history.</p>
+                  <button type="button" class="broadsheet-action-btn secondary-brass" id="btn-charter-logs">
+                    Create 1MB Logs Table
+                  </button>
+                </div>
+              </div>
+
+              <div class="charter-item-box">
+                <div class="charter-icon">
+                  <svg viewBox="0 0 24 24" class="medium-svg"><path d="M4 6h16M4 12h16M4 18h10" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="18" r="2" fill="currentColor"/></svg>
+                </div>
+                <div class="charter-details">
+                  <h4 class="sub-heading">Create Fast Title Search Index</h4>
+                  <p class="micro-body">Creates an index on the title field so searching through thousands of books is instantaneous.</p>
+                  <button type="button" class="broadsheet-action-btn secondary-brass" id="btn-charter-index">
+                    Create Title Index
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Right: Author Registry & Manual Inscription of Logs -->
+            <div class="stack-column">
+              <!-- Author Registry (POST /collection/authors) -->
+              <article class="broadsheet-card parchment-paper">
+                <div class="card-masthead">
+                  <span class="card-ornament">AUTHORS</span>
+                  <h3 class="card-heading">Register an Author</h3>
+                  <span class="card-tagline">Add an author to the authors collection</span>
+                </div>
+
+                <form id="form-author-register" class="vintage-form">
+                  <div class="form-row">
+                    <label class="vintage-label">Author Name</label>
+                    <input type="text" id="author-name" class="vintage-input" placeholder="e.g. Naguib Mahfouz" value="Naguib Mahfouz" required>
+                  </div>
+                  <div class="form-row two-fields">
+                    <div class="field-col">
+                      <label class="vintage-label">Lifespan / Era</label>
+                      <input type="text" id="author-era" class="vintage-input" placeholder="e.g. 1911–2006" value="1911–2006">
+                    </div>
+                    <div class="field-col">
+                      <label class="vintage-label">Specialty / Title</label>
+                      <input type="text" id="author-distinction" class="vintage-input" placeholder="e.g. Nobel Laureate in Literature" value="Nobel Laureate in Literature">
+                    </div>
+                  </div>
+                  <button type="submit" class="broadsheet-action-btn primary-wax">
+                    Save Author
+                  </button>
+                </form>
+              </article>
+
+              <!-- Log Inscription (POST /logs) -->
+              <article class="broadsheet-card parchment-paper">
+                <div class="card-masthead">
+                  <span class="card-ornament">JOURNAL</span>
+                  <h3 class="card-heading">Write a New Activity Log</h3>
+                  <span class="card-tagline">Record an event into the perpetual logs table</span>
+                </div>
+
+                <form id="form-create-log" class="vintage-form">
+                  <div class="form-row two-fields">
+                    <div class="field-col">
+                      <label class="vintage-label">Event Type</label>
+                      <select id="log-action" class="vintage-input select-vintage">
+                        <option value="BOOK_CREATED">BOOK_CREATED (New Book Added)</option>
+                        <option value="FOLIO_RESTORED">FOLIO_RESTORED (Cleaned &amp; Repaired)</option>
+                        <option value="CURATOR_AUDITED">CURATOR_AUDITED (Annual Inspection)</option>
+                        <option value="PATRON_CONSULTATION">PATRON_CONSULTATION (Borrowed by Reader)</option>
+                      </select>
+                    </div>
+                    <div class="field-col">
+                      <label class="vintage-label">Related Book Title</label>
+                      <input type="text" id="log-book-title" class="vintage-input" placeholder="e.g. Brave New World" value="Brave New World">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <label class="vintage-label">Log Note / Explanation</label>
+                    <input type="text" id="log-notes" class="vintage-input" placeholder="e.g. Checked by librarian and placed on top shelf." value="Checked by librarian and placed on top shelf.">
+                  </div>
+                  <button type="submit" class="broadsheet-action-btn">
+                    Save Event Log
+                  </button>
+                </form>
+              </article>
+            </div>
+
+          </div>
+
+        </main>
+
+        <!-- ============================================================== -->
+        <!-- BROADSHEET FOOTER (Crescent Hilal & Vintage Details) -->
+        <!-- ============================================================== -->
+        <footer class="newspaper-colophon">
+          <div class="colophon-divider">
+            <span class="rule-line"></span>
+            <span class="printer-mark hilal-mark" title="Hilal (Crescent)">
+              <svg viewBox="0 0 24 24" class="hilal-svg">
+                <path d="M12.5 3C7.25 3 3 7.25 3 12.5S7.25 22 12.5 22c3.1 0 5.86-1.48 7.62-3.77-5.11-.47-9.12-4.78-9.12-10.03 0-2.4.87-4.6 2.32-6.32-.27-.05-.54-.08-.82-.08z" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="rule-line"></span>
+          </div>
+
+          <div class="colophon-grid">
+            <div class="colophon-col">
+              <h4>PRINTED IN CAIRO</h4>
+              <p>Typeset in classic 1980s press style. Clean pixel-perfect CSS with smooth animations and zero emojis.</p>
+            </div>
+            <div class="colophon-col center">
+              <h4>THE CAIRO BOOK GUILD</h4>
+              <p>Preserving timeless literature, classic novels, and rare manuscripts. Autumn 1984 Special Edition.</p>
+            </div>
+            <div class="colophon-col right">
+              <h4>BACKEND CONNECTION</h4>
+              <p>Strictly powered by MongoDB collections: <em>books</em>, <em>authors</em>, and <em>logs</em>.</p>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: THE CURATOR'S READING DESK (Open 2-Page Antique Folio) -->
+  <!-- ============================================================== -->
+  <div class="reading-desk-modal-backdrop" id="reading-desk-modal">
+    <div class="reading-desk-book-wrapper">
+      
+      <!-- Close Brass Button -->
+      <button class="modal-close-brass" id="btn-close-desk" title="Return book to shelf">
+        &times;
+      </button>
+
+      <!-- The Open Folio (Two Antique Pages) -->
+      <div class="open-book-spread">
+        
+        <!-- Left Folio Page -->
+        <div class="book-page left-page">
+          <div class="page-deckle-edge"></div>
+          <div class="page-content-inner">
+            <div class="page-header-stamp">
+              <span class="guild-stamp-text">CAIRO BOOK VAULT &bull; ARCHIVE DESK</span>
+              <span class="page-number-vintage" id="modal-accession-no">CAT. NO. 84-2024</span>
+            </div>
+
+            <div class="woodcut-illustration-frame">
+              <svg viewBox="0 0 160 120" class="woodcut-frame-svg">
+                <rect x="10" y="10" width="140" height="100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <rect x="16" y="16" width="128" height="88" fill="none" stroke="currentColor" stroke-width="0.8"/>
+                <!-- Open Book & Candle drawing -->
+                <path d="M40 70 Q80 60 120 70 L115 88 Q80 78 45 88 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <line x1="80" y1="65" x2="80" y2="83" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Candle -->
+                <line x1="80" y1="40" x2="80" y2="55" stroke="currentColor" stroke-width="2"/>
+                <ellipse cx="80" cy="36" rx="3" ry="5" fill="currentColor"/>
+              </svg>
+            </div>
+
+            <div class="manuscript-title-block">
+              <span class="vintage-label">BOOK TITLE</span>
+              <h2 class="manuscript-title" id="modal-book-title">Brave New World</h2>
+              <div class="manuscript-author-line">
+                Written by <strong id="modal-book-author">Aldous Huxley</strong>
+              </div>
+            </div>
+
+            <div class="reading-page-ornament">
+              <span>❧ &sect; ❧</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Book Gutter & Silk Ribbon -->
+        <div class="book-spine-gutter">
+          <div class="silk-ribbon"></div>
+        </div>
+
+        <!-- Right Folio Page -->
+        <div class="book-page right-page">
+          <div class="page-deckle-edge"></div>
+          <div class="page-content-inner">
+            <div class="page-header-stamp">
+              <span class="guild-stamp-text">BOOK DETAILS</span>
+              <span class="page-number-vintage" id="modal-page-num">PAGE 1</span>
+            </div>
+
+            <div class="folio-particulars-list">
+              <div class="particular-row">
+                <span class="part-label">Release Year:</span>
+                <strong class="part-val" id="modal-book-year">1932</strong>
+              </div>
+              <div class="particular-row">
+                <span class="part-label">Categories:</span>
+                <div class="genres-wax-seals" id="modal-book-genres">
+                  <span class="wax-seal-tag">Science Fiction</span>
+                </div>
+              </div>
+              <div class="particular-row">
+                <span class="part-label">Database ID:</span>
+                <span class="part-val id-mono" id="modal-book-id">#6aa34201...</span>
+              </div>
+            </div>
+
+            <div class="archival-stamp-box">
+              <div class="ink-stamp" id="modal-ink-stamp">
+                VERIFIED &amp; CHECKED &bull; CAIRO 1984
+              </div>
+            </div>
+
+            <div class="modal-page-actions">
+              <button class="broadsheet-action-btn secondary-brass" id="modal-btn-lookup-logs">
+                <svg viewBox="0 0 24 24" class="mini-svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="1.5"/><polyline points="10 9 9 9 8 9" stroke="currentColor" stroke-width="1.5"/></svg>
+                View History Logs
+              </button>
+              <button class="broadsheet-action-btn primary-wax" id="modal-btn-amend">
+                <svg viewBox="0 0 24 24" class="mini-svg"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                Update Year
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- VINTAGE TELEGRAPH DISPATCH (Toast Notifications) -->
+  <!-- ============================================================== -->
+  <div class="telegraph-toast-container" id="toast-container"></div>
+
+  <!-- Client Script -->
+  <script src="app.js"></script>
+</body>
+</html>
