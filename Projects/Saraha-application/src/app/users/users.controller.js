@@ -1,12 +1,15 @@
 import * as usersService from './users.service.js';
+import {
+  successResponse,
+} from '../../common/utils/response.js';
+
 
 const getMyProfile = async (req, res, next) => {
   try {
     const user = await usersService.getUserById(req.user.id);
 
-    return res.status(200).json({
-      success: true,
-      message: 'User retrieved successfully.',
+    return successResponse(res, {
+      message: 'User profile retrieved successfully.',
       data: {
         user,
       },
@@ -23,11 +26,11 @@ const updateMyProfile = async (req, res, next) => {
       req.body,
     );
 
-    return res.status(200).json({
-      success: true,
+    return successResponse(res, {
+
       message: 'User updated successfully.',
       data: {
-        user,
+        user: user,
       },
     });
   } catch (error) {
@@ -39,9 +42,30 @@ const deleteMyAccount = async (req, res, next) => {
   try {
     await usersService.deleteUser(req.user.id);
 
-    return res.status(200).json({
-      success: true,
-      message: 'Account deleted successfully.',
+    return successResponse(res, {
+
+      message: 'User account deleted successfully.',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const changeMyPassword = async (req, res, next) => {
+  try {
+    const {
+      currentPassword,
+      newPassword,
+    } = req.body;
+
+    await usersService.changePassword(
+      req.user.id,
+      currentPassword,
+      newPassword,
+    );
+
+    return successResponse(res, {
+      message: 'Password changed successfully.',
     });
   } catch (error) {
     next(error);
@@ -52,4 +76,5 @@ export {
   getMyProfile,
   updateMyProfile,
   deleteMyAccount,
+  changeMyPassword,
 };

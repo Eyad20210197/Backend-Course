@@ -2,6 +2,8 @@ import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 
 import * as otpsRepository from './otps.repository.js';
+import AppError from '../../common/errors/AppError.js';
+
 
 const OTP_DURATION = 1000 * 60 * 10; // 10 minutes
 const MAX_ATTEMPTS = 5;
@@ -43,22 +45,19 @@ const verifyOtp = async (email, purpose, code) => {
   );
 
   if (!otp) {
-    const error = new Error('Invalid or expired OTP.');
-    error.statusCode = 400;
-    error.code = 'INVALID_OR_EXPIRED_OTP';
-
-    throw error;
+    throw new AppError(
+      'No active OTP found for this email and purpose.',
+      400,
+      'INVALID_OR_EXPIRED_OTP'
+    );
   }
 
   if (otp.attempts >= MAX_ATTEMPTS) {
-    const error = new Error(
-      'Too many verification attempts.',
+    throw new AppError(
+      'Maximum OTP verification attempts exceeded.',
+      400,
+      'MAX_ATTEMPTS_EXCEEDED'
     );
-
-    error.statusCode = 429;
-    error.code = 'OTP_MAX_ATTEMPTS';
-
-    throw error;
   }
 
   const codeMatches = await bcrypt.compare(
@@ -69,11 +68,11 @@ const verifyOtp = async (email, purpose, code) => {
   if (!codeMatches) {
     await otpsRepository.incrementAttempts(otp._id);
 
-    const error = new Error('Invalid OTP.');
-    error.statusCode = 400;
-    error.code = 'INVALID_OTP';
-
-    throw error;
+    throw new AppError(
+      'Invalid OTP code.',
+      400,
+      'INVALID_OTP'
+    );
   }
 
   await otpsRepository.markAsUsed(otp._id);

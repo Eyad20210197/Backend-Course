@@ -79,6 +79,28 @@ const existsByEmail = async (email, options = {}) => {
     return User.exists(filter);
 };
 
+const verifyEmailById = async (userId) => {
+  return User.findOneAndUpdate(
+    {
+      _id: userId,
+      deletedAt: null,
+    },
+    {
+      isEmailVerified: true,
+    },
+    {
+      new: true,
+    },
+  );
+};
+
+const findByIdWithPassword = async (userId) => {
+  return User.findOne({
+    _id: userId,
+    deletedAt: null,
+  }).select('+password');
+};
+
 export {
     create,
     findById,
@@ -87,4 +109,6 @@ export {
     softDeleteById,
     restoreById,
     existsByEmail,
+    verifyEmailById,
+    findByIdWithPassword,
 };

@@ -1,4 +1,7 @@
 import * as authService from './auth.service.js';
+import {
+  successResponse,
+} from '../../common/utils/response.js';
 
 const register = async (req, res, next) => {
   try {
@@ -17,8 +20,8 @@ const register = async (req, res, next) => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    return res.status(201).json({
-      success: true,
+    return successResponse(res, {
+      statusCode: 201,
       message: 'User registered successfully.',
       data: {
         user: result.user,
@@ -45,8 +48,8 @@ const login = async (req, res, next) => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    return res.status(200).json({
-      success: true,
+    return successResponse(res, {
+      
       message: 'Login successful.',
       data: {
         user: result.user,
@@ -67,9 +70,52 @@ const logout = async (req, res, next) => {
       sameSite: 'lax',
     });
 
-    return res.status(200).json({
-      success: true,
+    return successResponse(res, {
+      
       message: 'Logout successful.',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifyEmail = async (req, res, next) => {
+  try {
+    const { email, code } = req.body;
+
+    const result = await authService.verifyEmail(
+      email,
+      code,
+    );
+
+    res.cookie('sessionToken', result.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
+
+    return successResponse(res, {
+      
+      message: 'Email verified successfully.',
+      data: {
+        user: result.user,
+      },
+    });
+  } 
+  catch (error) {
+    next(error);
+  }
+};
+
+const resendVerification = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    await authService.resendVerification(email);
+
+    return successResponse(res, {
+      message: 'Verification code sent successfully.',
     });
   } catch (error) {
     next(error);
@@ -80,4 +126,6 @@ export {
   register,
   login,
   logout,
+  verifyEmail,
+  resendVerification,
 };

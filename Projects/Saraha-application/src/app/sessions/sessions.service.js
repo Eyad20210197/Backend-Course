@@ -2,7 +2,7 @@ import crypto from 'crypto';
 
 import * as sessionsRepository from './sessions.repository.js';
 
-const SESSION_DURATION = 1000 * 60 * 60 * 24 * 7; // 7 days
+const SESSION_DURATION = 1000 * 60 * 30 ; // expires in 30 minutes
 
 const generateToken = () => {
   return crypto.randomBytes(32).toString('hex');

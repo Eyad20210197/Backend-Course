@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import connectToDatabase from './common/db/connection.js';
+import errorHandler from './common/errors/errorHandler.js'
 import usersRouter from './app/users/users.route.js';
 import authRouter from './app/auth/auth.route.js';
 
@@ -19,6 +20,8 @@ const bootstrap = async () => {
   app.use('/users', usersRouter);
   app.use('/auth', authRouter);
 
+
+  app.use(errorHandler);
   return app;
 };
 

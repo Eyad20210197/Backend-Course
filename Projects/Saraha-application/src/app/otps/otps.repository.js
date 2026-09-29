@@ -39,9 +39,17 @@ const incrementAttempts = async (otpId) => {
   );
 };
 
+const deleteByEmailAndPurpose = async (email, purpose) => {
+  return OTP.deleteMany({
+    email,
+    purpose,
+  });
+};
+
 export {
   create,
   findActiveByEmailAndPurpose,
   markAsUsed,
   incrementAttempts,
+  deleteByEmailAndPurpose,
 };
