@@ -1,21 +1,19 @@
-    const validate = (schema) => {
-        return (req, res, next) => {
-            const { error, value } = schema.validate(
-                req.body ?? {},
-                {
-                    abortEarly: false,
-                    stripUnknown: true,
-                },
-            );
+const validate = (schema, source = 'body') => {
+  return (req, res, next) => {
+    const target = req[source] ?? {};
+    const { error, value } = schema.validate(target, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
 
-            if (error) {
-                return next(error);
-            }
+    if (error) {
+      return next(error);
+    }
 
-            req.body = value;
+    req[source] = value;
 
-            next();
-        };
-    };
+    next();
+  };
+};
 
-    export default validate;    
+export default validate;
