@@ -36,7 +36,7 @@ router.post('/verify-email',
   verifyEmail
 );
 
-router.post('resend-verification',
+router.post('/resend-verification',
   validate(resendVerificationSchema),
   resendVerification
 );

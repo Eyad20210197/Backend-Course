@@ -10,7 +10,8 @@ const findById = async (requestId) => {
 };
 
 const findByMessageId = async (messageId) => {
-  return IdentityRequest.findOne({ messageId });
+  return IdentityRequest.findOne({ messageId })
+    .populate('messageId', 'content createdAt receiverId');
 };
 
 const findBySenderId = async (senderId) => {

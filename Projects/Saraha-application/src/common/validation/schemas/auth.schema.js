@@ -1,57 +1,56 @@
-import joi from 'joi';
+import Joi from 'joi';
 
-const registerSchema = joi.object({ 
-    name: joi.string()
+const registerSchema = Joi.object({ 
+    name: Joi.string()
     .required()
     .min(3)
-    .max(30)
-    .required(),
+    .max(30),
 
-    email: joi.string()
+    email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .lowercase()
     .trim(),
 
-    provider: joi.string()
+    provider: Joi.string()
     .valid('local', 'google')
     .required(),
 
-    password: joi.string()
+    password: Joi.string()
     .min(8)
     .max(128)
     .when('provider',{
         is: 'local',
-        then: joi.required(),
-        otherwise: joi.forbidden()
+        then: Joi.required(),
+        otherwise: Joi.forbidden()
     }),
 });
 
-const loginSchema = joi.object({
-  email: joi.string()
+const loginSchema = Joi.object({
+  email: Joi.string()
     .trim()
     .lowercase()
     .email()
     .required(),
 
-  password: joi.string()
+  password: Joi.string()
     .required(),
 });
 
-const verifyEmailSchema = joi.object({
-  email: joi.string()
+const verifyEmailSchema = Joi.object({
+  email: Joi.string()
     .trim()
     .lowercase()
     .email()
     .required(),
 
-  code: joi.string()
+  code: Joi.string()
     .pattern(/^\d{6}$/)
     .required(),
 });
 
 const resendVerificationSchema = Joi.object({
-  email: joi.string()
+  email: Joi.string()
     .trim()
     .lowercase()
     .email({ tlds: { allow: false } })

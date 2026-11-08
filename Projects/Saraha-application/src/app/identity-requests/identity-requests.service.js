@@ -100,7 +100,11 @@ const respondToIdentityRequest = async ({ requestId, senderId, status }) => {
 };
 
 const getIdentityRequestDetails = async ({ requestId, currentUserId }) => {
-  const request = await identityRequestsRepository.findById(requestId);
+  let request = await identityRequestsRepository.findById(requestId);
+
+  if (!request) {
+    request = await identityRequestsRepository.findByMessageId(requestId);
+  }
 
   if (!request) {
     throw new AppError(

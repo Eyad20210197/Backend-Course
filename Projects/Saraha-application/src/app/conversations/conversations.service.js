@@ -49,6 +49,8 @@ const sendConversationMessage = async ({ conversationId, userId, content }) => {
     content,
   });
 
+  await message.populate('senderId', 'name email');
+
   return message;
 };
 

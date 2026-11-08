@@ -10,7 +10,16 @@ const validate = (schema, source = 'body') => {
       return next(error);
     }
 
-    req[source] = value;
+    try {
+      req[source] = value;
+    } catch {
+      Object.defineProperty(req, source, {
+        value,
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      });
+    }
 
     next();
   };
